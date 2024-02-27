@@ -1,0 +1,2 @@
+#dbservername    nettype       hostname                                                 servicename      options
+ informix        onsoctcp      genero-docker-dev-ifxdb-1.genero-docker-dev_default       9088

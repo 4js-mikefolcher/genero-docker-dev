@@ -1,0 +1,55 @@
+version: '3.4'
+volumes:
+  genero-dev-disk:
+    external: true
+  genero-tmp-disk:
+    external: true
+  genero-ifx-db:
+    external: true
+  genero-ora-db:
+    external: true
+services:
+  ifxdb:
+    image: ibmcom/informix-developer-database:latest 
+    environment:
+      LICENSE: 'accept'
+    ports:
+      - '9088:9088'
+      - '9089:9089'
+    expose:
+      - '9088'
+      - '9089'
+    volumes:
+      - genero-ifx-db:/opt/ibm/data
+  oradb:
+    image: container-registry.oracle.com/database/free:latest
+    environment:
+      ORACLE_PWD: 'Pass123'
+    ports:
+      - "1521:1521"
+      - "8080:8080"
+      - "5500:5500"
+    expose:
+      - '1521'
+      - '8080'
+      - '5500'
+    volumes:
+      - genero-ora-db:/opt/oracle/oradata
+  fgldev:
+    build:
+       context: ./genero
+       args:
+         FGLLICNUM: 'TAB#AAF01AIM'
+         PUBLICKEY: 'id_ed25519_docker.pub'
+         GST_PCK: 'fjs-gstsrv-4.01.04-build202310101739-l64xl228.run'
+         GENERO_PASSWORD: 'Pass123'
+    environment:
+      FGLLICNUM: 'TAB#AAF01AIM'
+    ports:
+      - "8888:80"
+      - "2222:22"
+      - "6336:6336"
+      - "6320:6320"
+    volumes:
+      - genero-tmp-disk:/tmp
+      - genero-dev-disk:/home/genero
