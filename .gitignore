@@ -26,4 +26,4 @@ replay_pid*
 # Genero / Docker install files
 *.run
 id_ed25519_docker.pub
-
+mike-docker-compose.yaml

@@ -39,12 +39,12 @@ services:
     build:
        context: ./genero
        args:
-         FGLLICNUM: 'TAB#AAF01AIM'
-         PUBLICKEY: 'id_ed25519_docker.pub'
+         FGLLICNUM: 'Your License #'
+         PUBLICKEY: 'mykey.pub'
          GST_PCK: 'fjs-gstsrv-4.01.04-build202310101739-l64xl228.run'
          GENERO_PASSWORD: 'Pass123'
     environment:
-      FGLLICNUM: 'TAB#AAF01AIM'
+      FGLLICNUM: 'Your License #'
     ports:
       - "8888:80"
       - "2222:22"
